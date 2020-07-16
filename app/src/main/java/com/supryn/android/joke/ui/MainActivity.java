@@ -1,8 +1,10 @@
-package com.supryn.android.joke;
+package com.supryn.android.joke.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.supryn.android.joke.R;
 
 public class MainActivity extends AppCompatActivity {
 

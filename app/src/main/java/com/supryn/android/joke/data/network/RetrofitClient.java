@@ -1,6 +1,8 @@
 package com.supryn.android.joke.data.network;
 
 
+import android.content.Context;
+
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.supryn.android.joke.model.Joke;
@@ -21,27 +23,27 @@ final class RetrofitClient {
     private static Retrofit mRetrofit;
 
 
-    private RetrofitClient() {
+    private RetrofitClient(Context context) {
         mRetrofit = new Retrofit.Builder()
             .baseUrl(JokeConstant.JOKES_API_BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(createGsonConverter())
+            .addConverterFactory(createGsonConverter(context))
             .build();
     }
 
-    static synchronized RetrofitClient getInstance() {
+    static synchronized RetrofitClient getInstance(Context context) {
         if (sInstance == null) {
-                sInstance = new RetrofitClient();
+                sInstance = new RetrofitClient(context);
         }
 
         return sInstance;
     }
 
-    private static Converter.Factory createGsonConverter() {
+    private static Converter.Factory createGsonConverter(Context context) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(
                 new TypeToken<Joke>() {}.getType(),
-                new JokeDeserializer());
+                new JokeDeserializer(context));
 
         return GsonConverterFactory.create(gsonBuilder.create());
     }

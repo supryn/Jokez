@@ -38,5 +38,5 @@ public abstract class JokeDatabase extends RoomDatabase {
         return sInstance;
     }
 
-    public abstract JokeDao getJokeDao();
+    public abstract JokeDao jokeDao();
 }

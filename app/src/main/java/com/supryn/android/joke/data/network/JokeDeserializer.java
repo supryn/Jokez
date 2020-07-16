@@ -1,5 +1,7 @@
 package com.supryn.android.joke.data.network;
 
+import android.content.Context;
+
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -16,6 +18,11 @@ import java.lang.reflect.Type;
  */
 public class JokeDeserializer implements JsonDeserializer<Joke> {
 
+    private Context mContext;
+
+    public JokeDeserializer(Context context) {
+        mContext = context;
+    }
 
     @Override
     public Joke deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {

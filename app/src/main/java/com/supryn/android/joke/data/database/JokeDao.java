@@ -15,12 +15,11 @@ public interface JokeDao {
 
 
     /**
-     *
+     * Query to retrieve a joke
      *
      */
-    public LiveData<Joke> getJoke() {
-
-    }
+    @Query("SELECT * FROM joke_table WHERE joke_id = :jokeId")
+    public LiveData<Joke> getJoke(int jokeId);
 
 
     /**

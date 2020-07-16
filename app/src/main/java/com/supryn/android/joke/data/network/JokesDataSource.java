@@ -1,6 +1,8 @@
 package com.supryn.android.joke.data.network;
 
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -18,13 +20,13 @@ public final class JokesDataSource {
     private static RetrofitClient mRetrofitClient;
     private static MutableLiveData<Joke> mJoke;
 
-    private JokesDataSource() {
-        mRetrofitClient = RetrofitClient.getInstance();
+    private JokesDataSource(Context context) {
+        mRetrofitClient = RetrofitClient.getInstance(context);
     }
 
-    public static JokesDataSource getInstance() {
+    public static JokesDataSource getInstance(Context context) {
         if (sInstance == null) {
-            sInstance = new JokesDataSource();
+            sInstance = new JokesDataSource(context);
             mJoke = new MutableLiveData<>();
         }
 
@@ -40,7 +42,7 @@ public final class JokesDataSource {
                 .subscribe(joke -> mJoke.postValue(joke));
     }
 
-    public static LiveData<Joke> getJoke() {
+    public LiveData<Joke> getJoke() {
         return mJoke;
     }
 }
