@@ -5,8 +5,8 @@ import android.content.Context;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.supryn.android.joke.R;
 import com.supryn.android.joke.model.Joke;
-import com.supryn.android.joke.utility.JokeConstant;
 
 import retrofit2.Converter;
 import retrofit2.Retrofit;
@@ -25,7 +25,7 @@ final class RetrofitClient {
 
     private RetrofitClient(Context context) {
         mRetrofit = new Retrofit.Builder()
-            .baseUrl(JokeConstant.JOKES_API_BASE_URL)
+            .baseUrl(context.getString(R.string.jokes_api_base_url))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(createGsonConverter(context))
             .build();

@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel;
 import com.supryn.android.joke.data.JokeRepository;
 import com.supryn.android.joke.model.Joke;
 
+import java.util.List;
+
 public class JokeViewModel extends ViewModel {
 
     private JokeRepository mRepository;
@@ -14,7 +16,7 @@ public class JokeViewModel extends ViewModel {
         mRepository = repository;
     }
 
-    public LiveData<Joke> retrieveJoke() {
+    public LiveData<List<Joke>> retrieveJoke() {
         return mRepository.retrieveJoke();
     }
 }

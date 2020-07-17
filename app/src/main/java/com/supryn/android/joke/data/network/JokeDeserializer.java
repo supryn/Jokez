@@ -7,8 +7,8 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.supryn.android.joke.R;
 import com.supryn.android.joke.model.Joke;
-import com.supryn.android.joke.utility.JokeConstant;
 
 import java.lang.reflect.Type;
 
@@ -27,19 +27,23 @@ public class JokeDeserializer implements JsonDeserializer<Joke> {
     @Override
     public Joke deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         JsonObject jokeJson = json.getAsJsonObject();
-        String jokeType = jokeJson.get(JokeConstant.JSON_JOKE_TYPE).getAsString();
-        int jokeId = jokeJson.get(JokeConstant.JSON_JOKE_ID).getAsInt();
+        String jokeType = jokeJson.get(getStringResource(R.string.json_joke_type)).getAsString();
+        int jokeId = jokeJson.get(getStringResource(R.string.json_joke_id)).getAsInt();
 
         Joke joke;
-        if (JokeConstant.JSON_JOKE_TYPE_SINGLE.equals(jokeType)) {
-            String onePartJoke = jokeJson.get(JokeConstant.JSON_JOKE_SINGLE).getAsString();
+        if (getStringResource(R.string.json_joke_type_single).equals(jokeType)) {
+            String onePartJoke = jokeJson.get(getStringResource(R.string.json_joke_single)).getAsString();
             joke = new Joke(jokeType, onePartJoke, jokeId);
         } else {
-            String jokeSetup = jokeJson.get(JokeConstant.JSON_JOKE_TWOPART_SETUP).getAsString();
-            String jokeDelivery = jokeJson.get(JokeConstant.JSON_JOKE_TWOPART_DELIVERY).getAsString();
+            String jokeSetup = jokeJson.get(getStringResource(R.string.json_joke_twopart_setup)).getAsString();
+            String jokeDelivery = jokeJson.get(getStringResource(R.string.json_joke_twopart_delivery)).getAsString();
             joke = new Joke(jokeType, jokeSetup, jokeDelivery, jokeId);
         }
 
         return joke;
+    }
+
+    private String getStringResource(int resId) {
+        return mContext.getString(resId);
     }
 }

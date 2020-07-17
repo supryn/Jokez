@@ -18,9 +18,6 @@ public class Joke {
     @ColumnInfo(name = "joke_single")
     public String joke;
 
-    @ColumnInfo(name = "joke_double_setup")
-    public String setup;
-
     @ColumnInfo(name = "joke_double_delivery")
     public String delivery;
 
@@ -31,20 +28,14 @@ public class Joke {
         this.jokeId = jokeId;
     }
 
-    @Ignore
-    public Joke(String jokeType, String setup, String delivery, int jokeId) {
-        this.jokeType = jokeType;
-        this.setup = setup;
-        this.delivery = delivery;
-        this.jokeId = jokeId;
 
-    }
-
-    public Joke(String jokeType, String joke, String setup, String delivery, int jokeId) {
+    public Joke(String jokeType, String joke, String delivery, int jokeId) {
         this.jokeType = jokeType;
         this.joke = joke;
-        this.setup = setup;
         this.delivery = delivery;
         this.jokeId = jokeId;
+
     }
+
+
 }

@@ -3,12 +3,17 @@ package com.supryn.android.joke.ui.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.supryn.android.joke.R;
+import com.supryn.android.joke.databinding.FragmentJokeBinding;
+import com.supryn.android.joke.ui.JokeViewModel;
+import com.supryn.android.joke.ui.JokeViewModelFactory;
+import com.supryn.android.joke.utility.ObjectProviderUtil;
 
 /**
  * Fragment that displays a Joke.
@@ -17,23 +22,19 @@ import com.supryn.android.joke.R;
 public class JokeFragment extends Fragment {
 
 
-
-    public static JokeFragment getInstance() {
-        JokeFragment fragment = new JokeFragment();
-        Bundle bundle = new Bundle();
-//        bundle.putInt(MOVIE_ID_KEY, movieId);
-        fragment.setArguments(bundle);
-
-        return fragment;
-    }
-
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_joke, container, false);
+        FragmentJokeBinding binding = FragmentJokeBinding.inflate(inflater);
+        binding.setLifecycleOwner(this);
+
+        JokeViewModelFactory factory = ObjectProviderUtil.provideJokeViewModelFactory(getActivity().getApplicationContext());
+        JokeViewModel viewModel = new ViewModelProvider(this, factory).get(JokeViewModel.class);
+        viewModel.retrieveJoke().observe(getViewLifecycleOwner(), jokes -> {
+            String a = "a";
+        });
+
+
+        return binding.getRoot();
     }
 }

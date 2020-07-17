@@ -10,17 +10,16 @@ import androidx.room.RoomDatabase;
 import com.supryn.android.joke.model.Joke;
 
 /**
- * Local RoomDatabase.
+ * Local Room Database.
  *
  */
-@Database(entities = {Joke.class}, version = 1, exportSchema = false)
-//@TypeConverters({ })
+@Database(entities = {Joke.class}, version = 3, exportSchema = false)
 public abstract class JokeDatabase extends RoomDatabase {
 
     private static JokeDatabase sInstance;
     private static final String LOG_TAG = Joke.class.getSimpleName();
 
-    private static final String DB_NAME = "Popular_Movies";
+    private static final String DB_NAME = "Joke_DB";
 
 
     public static JokeDatabase getInstance(Context context) {

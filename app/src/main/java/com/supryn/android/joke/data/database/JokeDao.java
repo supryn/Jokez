@@ -1,34 +1,36 @@
 package com.supryn.android.joke.data.database;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.supryn.android.joke.model.Joke;
 
+import java.util.List;
+
 /**
  * Dao exposing CRUD database operations.
  *
  */
+@Dao
 public interface JokeDao {
 
+    @Query("SELECT * FROM joke_table")
+    LiveData<List<Joke>> getJokes();
 
-    /**
-     * Query to retrieve a joke
-     *
-     */
-    @Query("SELECT * FROM joke_table WHERE joke_id = :jokeId")
-    public LiveData<Joke> getJoke(int jokeId);
+    @Query("SELECT COUNT(joke_id) FROM joke_table")
+    int getJokeCount();
 
 
     /**
-     * Insert a joke into the database.
+     * Insert jokes into the database.
      *
-     * @param joke
+     * @param jokes
      */
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertJoke(Joke joke);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertJokes(List<Joke> jokes);
 
 
 }

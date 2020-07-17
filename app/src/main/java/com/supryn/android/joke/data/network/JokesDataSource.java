@@ -8,6 +8,13 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.supryn.android.joke.model.Joke;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -18,7 +25,7 @@ public final class JokesDataSource {
 
     private static JokesDataSource sInstance;
     private static RetrofitClient mRetrofitClient;
-    private static MutableLiveData<Joke> mJoke;
+    private static MutableLiveData<List<Joke>> mJokes;
 
     private JokesDataSource(Context context) {
         mRetrofitClient = RetrofitClient.getInstance(context);
@@ -27,22 +34,33 @@ public final class JokesDataSource {
     public static JokesDataSource getInstance(Context context) {
         if (sInstance == null) {
             sInstance = new JokesDataSource(context);
-            mJoke = new MutableLiveData<>();
+            mJokes = new MutableLiveData<>();
         }
 
         return sInstance;
     }
 
 
-    public void fetchJoke() {
+    public void fetchJokes() {
         JokesAPI jokesAPI = mRetrofitClient.getJokesAPI();
-        jokesAPI
-                .fetchJoke()
-                .subscribeOn(Schedulers.io())
-                .subscribe(joke -> mJoke.postValue(joke));
+
+        List<Observable<Joke>> requests = new ArrayList<>();
+        for (int i = 1; i <= 30; i++) {
+            requests.add(jokesAPI.fetchJoke(i));
+        }
+
+        Observable.zip(requests, objects -> {
+            List<Joke> jokes = new ArrayList<>();
+            for (Object o : objects) {
+                jokes.add((Joke) o);
+            }
+            return jokes;
+        })
+        .subscribeOn(Schedulers.io())
+        .subscribe(jokes -> mJokes.postValue(jokes));
     }
 
-    public LiveData<Joke> getJoke() {
-        return mJoke;
+    public LiveData<List<Joke>> getJokes() {
+        return mJokes;
     }
 }

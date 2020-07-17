@@ -1,19 +1,24 @@
 package com.supryn.android.joke.data;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 
 import com.supryn.android.joke.data.database.JokeDao;
 import com.supryn.android.joke.data.network.JokesDataSource;
 import com.supryn.android.joke.model.Joke;
 
+import java.util.List;
+
 public final class JokeRepository {
+
+    private static final String LOG_TAG = JokeRepository.class.getSimpleName();
+    private static final String LOG_JOKES_INSERTED = "Jokes inserted into DB.";
 
     private static JokeRepository sInstance;
     private static JokesDataSource mDataSource;
     private static JokeDao mDao;
     private static AppExecutors mExecutors;
-    private int mCurrentJokeId;
 
 
     private JokeRepository(JokesDataSource dataSource, JokeDao dao, AppExecutors executors) {
@@ -21,12 +26,12 @@ public final class JokeRepository {
         mDao = dao;
         mExecutors = executors;
 
-        mDataSource.getJoke().observeForever(joke -> {
-            Joke dbJoke = mDao.getJoke(joke.jokeId).getValue();
-            if (dbJoke == null) {
-                mDao.insertJoke(joke);
-                mCurrentJokeId = joke.jokeId;
-            }
+        mDataSource.getJokes().observeForever(joke -> {
+            mExecutors.getDiskExecutor().execute(() -> {
+                mDataSource.getJokes().observeForever(jokes -> mDao.insertJokes(jokes));
+                Log.d(LOG_TAG, LOG_JOKES_INSERTED);
+            });
+
         });
     }
 
@@ -39,12 +44,18 @@ public final class JokeRepository {
         return sInstance;
     }
 
-    public LiveData<Joke> retrieveJoke() {
+    public LiveData<List<Joke>> retrieveJoke() {
         mExecutors.getNetworkExecutor().execute(() -> {
-            mDataSource.fetchJoke();
+            if (isDataFetchNeeded()) {
+                mDataSource.fetchJokes();
+            }
         });
 
-        return mDao.getJoke(mCurrentJokeId);
+        return mDao.getJokes();
+    }
+
+    private boolean isDataFetchNeeded() {
+        return mDao.getJokeCount() <= 0;
     }
 
 }
