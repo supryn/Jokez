@@ -6,17 +6,17 @@ import androidx.lifecycle.ViewModel;
 import com.supryn.android.joke.data.JokeRepository;
 import com.supryn.android.joke.model.Joke;
 
-import java.util.List;
-
 public class JokeViewModel extends ViewModel {
 
     private JokeRepository mRepository;
+    private LiveData<Joke> mJoke;
 
-    public JokeViewModel(JokeRepository repository) {
+    public JokeViewModel(JokeRepository repository, int pageNumber) {
         mRepository = repository;
+        mJoke = mRepository.getJokeById(pageNumber);
     }
 
-    public LiveData<List<Joke>> retrieveJoke() {
-        return mRepository.retrieveJoke();
+    public LiveData<Joke> getJoke() {
+        return mJoke;
     }
 }

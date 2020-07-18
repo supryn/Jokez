@@ -27,6 +27,9 @@ public final class JokesDataSource {
     private static RetrofitClient mRetrofitClient;
     private static MutableLiveData<List<Joke>> mJokes;
 
+    //TODO : change to be dynamic
+    private static final int JOKES_SIZE = 30;
+
     private JokesDataSource(Context context) {
         mRetrofitClient = RetrofitClient.getInstance(context);
     }
@@ -45,7 +48,7 @@ public final class JokesDataSource {
         JokesAPI jokesAPI = mRetrofitClient.getJokesAPI();
 
         List<Observable<Joke>> requests = new ArrayList<>();
-        for (int i = 1; i <= 30; i++) {
+        for (int i = 0; i <= JOKES_SIZE; i++) {
             requests.add(jokesAPI.fetchJoke(i));
         }
 

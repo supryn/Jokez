@@ -14,8 +14,8 @@ import com.supryn.android.joke.ui.JokeViewModelFactory;
 public final class ObjectProviderUtil {
 
 
-    public static JokeViewModelFactory provideJokeViewModelFactory(Context context) {
-        return new JokeViewModelFactory(provideRepository(context));
+    public static JokeViewModelFactory provideJokeViewModelFactory(Context context, int pageNumber) {
+        return new JokeViewModelFactory(provideRepository(context), pageNumber);
     }
 
 
@@ -25,6 +25,4 @@ public final class ObjectProviderUtil {
                 JokesDataSource.getInstance(context),
                 AppExecutors.getInstance());
     }
-
-
 }

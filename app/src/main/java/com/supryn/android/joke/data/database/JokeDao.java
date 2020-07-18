@@ -33,4 +33,13 @@ public interface JokeDao {
     void insertJokes(List<Joke> jokes);
 
 
+    /**
+     * Gets a single joke by its' movie id.
+     *
+     * @param jokeId
+     * @return LiveData<Joke>
+     */
+    @Query("SELECT * FROM joke_table WHERE joke_id = :jokeId")
+    LiveData<Joke> getJokeById(int jokeId);
+
 }

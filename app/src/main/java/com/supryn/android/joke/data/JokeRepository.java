@@ -26,13 +26,15 @@ public final class JokeRepository {
         mDao = dao;
         mExecutors = executors;
 
-        mDataSource.getJokes().observeForever(joke -> {
+        retrieveJokes();
+        mDataSource.getJokes().observeForever(jokes -> {
             mExecutors.getDiskExecutor().execute(() -> {
-                mDataSource.getJokes().observeForever(jokes -> mDao.insertJokes(jokes));
+                mDao.insertJokes(jokes);
                 Log.d(LOG_TAG, LOG_JOKES_INSERTED);
             });
-
         });
+
+
     }
 
 
@@ -44,15 +46,25 @@ public final class JokeRepository {
         return sInstance;
     }
 
-    public LiveData<List<Joke>> retrieveJoke() {
+    private void retrieveJokes() {
         mExecutors.getNetworkExecutor().execute(() -> {
             if (isDataFetchNeeded()) {
                 mDataSource.fetchJokes();
             }
         });
-
-        return mDao.getJokes();
     }
+
+    /**
+     * Get a specific joke by its id.
+     *
+     * @param jokeId
+     * @return LiveData<Joke> joke
+     */
+    public LiveData<Joke> getJokeById(int jokeId) {
+        return mDao.getJokeById(jokeId);
+    }
+
+
 
     private boolean isDataFetchNeeded() {
         return mDao.getJokeCount() <= 0;

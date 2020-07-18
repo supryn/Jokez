@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/jokeFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/jokeFragment"
-        android:name="com.supryn.android.joke.ui.fragment.JokeFragment"
+        android:id="@+id/homeFragment"
+        android:name="com.supryn.android.joke.ui.fragment.HomeFragment"
         android:label="fragment_joke"
-        tools:layout="@layout/fragment_joke" />
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.supryn.android.joke.ui.fragment.FavoriteFragment"
