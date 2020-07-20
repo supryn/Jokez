@@ -13,7 +13,7 @@ import com.supryn.android.joke.model.Joke;
  * Local Room Database.
  *
  */
-@Database(entities = {Joke.class}, version = 3, exportSchema = false)
+@Database(entities = {Joke.class}, version = 4, exportSchema = false)
 public abstract class JokeDatabase extends RoomDatabase {
 
     private static JokeDatabase sInstance;

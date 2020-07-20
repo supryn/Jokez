@@ -8,17 +8,13 @@ import com.supryn.android.joke.data.JokeRepository;
 public class JokeViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
     private final JokeRepository mRepository;
-    private int mPageNumber;
 
-
-    public JokeViewModelFactory(JokeRepository repository, int pageNumber) {
+    public JokeViewModelFactory(JokeRepository repository) {
         mRepository = repository;
-        mPageNumber = pageNumber;
     }
-
 
     @Override
     public <T extends ViewModel> T create( Class<T> modelClass) {
-        return (T) new JokeViewModel(mRepository, mPageNumber);
+        return (T) new JokeViewModel(mRepository);
     }
 }

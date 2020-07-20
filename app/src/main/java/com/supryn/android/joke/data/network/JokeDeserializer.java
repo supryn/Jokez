@@ -37,7 +37,7 @@ public class JokeDeserializer implements JsonDeserializer<Joke> {
         } else {
             String jokeSetup = jokeJson.get(getStringResource(R.string.json_joke_twopart_setup)).getAsString();
             String jokeDelivery = jokeJson.get(getStringResource(R.string.json_joke_twopart_delivery)).getAsString();
-            joke = new Joke(jokeType, jokeSetup, jokeDelivery, jokeId);
+            joke = new Joke(jokeType, jokeSetup, jokeDelivery, jokeId, false);
         }
 
         return joke;

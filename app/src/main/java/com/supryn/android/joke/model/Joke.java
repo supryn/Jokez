@@ -21,6 +21,9 @@ public class Joke {
     @ColumnInfo(name = "joke_double_delivery")
     public String delivery;
 
+    @ColumnInfo(name = "is_favorite")
+    public boolean isFavorite;
+
     @Ignore
     public Joke(String jokeType, String joke, int jokeId) {
         this.jokeType = jokeType;
@@ -29,12 +32,12 @@ public class Joke {
     }
 
 
-    public Joke(String jokeType, String joke, String delivery, int jokeId) {
+    public Joke(String jokeType, String joke, String delivery, int jokeId, boolean isFavorite) {
         this.jokeType = jokeType;
         this.joke = joke;
         this.delivery = delivery;
         this.jokeId = jokeId;
-
+        this.isFavorite = isFavorite;
     }
 
 
