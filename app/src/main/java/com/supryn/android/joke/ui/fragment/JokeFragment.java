@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.supryn.android.joke.R;
 import com.supryn.android.joke.databinding.FragmentJokeBinding;
@@ -21,6 +22,8 @@ import com.supryn.android.joke.model.Joke;
 import com.supryn.android.joke.ui.JokeViewModel;
 import com.supryn.android.joke.ui.JokeViewModelFactory;
 import com.supryn.android.joke.utility.ObjectProviderUtil;
+
+import org.w3c.dom.Text;
 
 
 public class JokeFragment extends Fragment {
@@ -32,7 +35,6 @@ public class JokeFragment extends Fragment {
     private AnimatedVectorDrawable mEmptyHeart;
     private AnimatedVectorDrawable mFillHeart;
     private int mPageNumber;
-    private boolean full = false;
 
     public static JokeFragment getInstance(int position) {
         JokeFragment fragment = new JokeFragment();
@@ -54,6 +56,12 @@ public class JokeFragment extends Fragment {
         mFillHeart = (AnimatedVectorDrawable) getActivity().getDrawable(R.drawable.avd_heart_fill);
 
 
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        boolean isFavorite = sharedPreferences.getBoolean(PREF_FAVORITE_KEY + mPageNumber, false);
+        AnimatedVectorDrawable drawable = isFavorite ? mFillHeart : mEmptyHeart;
+        ((ImageView) binding.getRoot().findViewById(R.id.favorite_joke_button)).setImageDrawable(drawable);
+        drawable.start();
+
         JokeViewModelFactory factory = ObjectProviderUtil.provideJokeViewModelFactory(getActivity().getApplicationContext());
         mViewModel = new ViewModelProvider(this, factory).get(JokeViewModel.class);
         mViewModel.getJoke(mPageNumber).observe(getViewLifecycleOwner(), joke -> {
@@ -71,10 +79,19 @@ public class JokeFragment extends Fragment {
             imageView.setImageDrawable(drawable);
             drawable.start();
             isFavorite = !isFavorite;
+            sharedPreferences.edit().putBoolean(PREF_FAVORITE_KEY + mPageNumber, isFavorite).commit();
             mViewModel.updateFavorite(mPageNumber, isFavorite);
-            sharedPreferences.edit().putBoolean(PREF_FAVORITE_KEY + mPageNumber, isFavorite).apply();
         });
     }
 
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }

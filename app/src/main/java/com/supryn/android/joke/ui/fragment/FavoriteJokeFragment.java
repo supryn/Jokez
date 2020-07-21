@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -36,7 +38,6 @@ public class FavoriteJokeFragment extends Fragment {
     private AnimatedVectorDrawable mFillHeart;
     private int mPageNumber;
     private List<Integer> mFavoriteJokeIds;
-    private boolean full = false;
 
     public static FavoriteJokeFragment getInstance(int position, List<Integer> favoriteJokeIds) {
         FavoriteJokeFragment fragment = new FavoriteJokeFragment();
@@ -49,7 +50,7 @@ public class FavoriteJokeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         FragmentJokeBinding binding = FragmentJokeBinding.inflate(inflater);
         binding.setLifecycleOwner(this);
@@ -60,12 +61,16 @@ public class FavoriteJokeFragment extends Fragment {
         mEmptyHeart = (AnimatedVectorDrawable) getActivity().getDrawable(R.drawable.avd_heart_empty);
         mFillHeart = (AnimatedVectorDrawable) getActivity().getDrawable(R.drawable.avd_heart_fill);
 
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        boolean isFavorite = sharedPreferences.getBoolean(PREF_FAVORITE_KEY + getJokeId(), false);
+        AnimatedVectorDrawable drawable = isFavorite ? mFillHeart : mEmptyHeart;
+        ((ImageView) binding.getRoot().findViewById(R.id.favorite_joke_button)).setImageDrawable(drawable);
+        drawable.start();
+
 
         JokeViewModelFactory factory = ObjectProviderUtil.provideJokeViewModelFactory(getActivity().getApplicationContext());
         mViewModel = new ViewModelProvider(this, factory).get(JokeViewModel.class);
-        mViewModel.getJoke(mFavoriteJokeIds.get(mPageNumber)).observe(getViewLifecycleOwner(), joke -> {
-            binding.setJoke(joke);
-        });
+        mViewModel.getJoke(mFavoriteJokeIds.get(mPageNumber)).observe(getViewLifecycleOwner(), binding::setJoke);
 
         return binding.getRoot();
     }
@@ -73,13 +78,17 @@ public class FavoriteJokeFragment extends Fragment {
     private void setupClickListener(ImageView imageView) {
         imageView.setOnClickListener(v -> {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            boolean isFavorite = sharedPreferences.getBoolean(PREF_FAVORITE_KEY + mPageNumber, false);
+            boolean isFavorite = sharedPreferences.getBoolean(PREF_FAVORITE_KEY + getJokeId(), false);
             AnimatedVectorDrawable drawable = isFavorite ? mEmptyHeart : mFillHeart;
             imageView.setImageDrawable(drawable);
             drawable.start();
             isFavorite = !isFavorite;
-            mViewModel.updateFavorite(mPageNumber, isFavorite);
-            sharedPreferences.edit().putBoolean(PREF_FAVORITE_KEY + mPageNumber, isFavorite).apply();
+            sharedPreferences.edit().putBoolean(PREF_FAVORITE_KEY + getJokeId(), isFavorite).commit();
+            mViewModel.updateFavorite(getJokeId(), isFavorite);
         });
+    }
+
+    private int getJokeId() {
+        return mFavoriteJokeIds.get(mPageNumber);
     }
 }
