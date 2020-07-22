@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Jokester</string>
 
+    <string name="app_fragment_home_joke">app_fragment_home_joke</string>
+    <string name="app_fragment_favorite_joke">app_fragment_favorite_joke</string>
+
     <!-- Jokes API Base URL -->
     <string name="jokes_api_base_url">https://sv443.net/jokeapi/v2/joke/</string>
 

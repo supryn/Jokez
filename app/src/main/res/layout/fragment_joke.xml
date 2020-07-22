@@ -14,7 +14,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.JokeFragment"
+        tools:context=".ui.fragment.HomeJokeFragment"
         android:layout_marginTop="@dimen/activity_main_vertical_margin"
         android:layout_marginBottom="@dimen/activity_main_vertical_margin"
         android:layout_marginLeft="@dimen/activity_main_horizontal_margin"
@@ -70,7 +70,7 @@
                 android:src="@drawable/share" />
 
             <ImageView
-                android:id="@+id/favorite_joke_button"
+                android:id="@+id/button_favorite_joke"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/content_description_favorite"

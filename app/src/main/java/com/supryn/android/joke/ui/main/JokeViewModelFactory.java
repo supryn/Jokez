@@ -1,4 +1,4 @@
-package com.supryn.android.joke.ui;
+package com.supryn.android.joke.ui.main;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;

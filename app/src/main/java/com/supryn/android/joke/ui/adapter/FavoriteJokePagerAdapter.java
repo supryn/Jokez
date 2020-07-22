@@ -5,7 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.supryn.android.joke.ui.fragment.FavoriteJokeFragment;
+import com.supryn.android.joke.R;
+import com.supryn.android.joke.ui.fragment.BaseJokeFragment;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class FavoriteJokePagerAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        return FavoriteJokeFragment.getInstance(position, mFavoriteJokeIds);
+        return BaseJokeFragment.getInstance(R.string.app_fragment_favorite_joke, position, mFavoriteJokeIds);
     }
 
     @Override

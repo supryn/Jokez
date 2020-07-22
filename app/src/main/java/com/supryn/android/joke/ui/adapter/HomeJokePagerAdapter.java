@@ -5,21 +5,22 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.supryn.android.joke.ui.fragment.JokeFragment;
+import com.supryn.android.joke.R;
+import com.supryn.android.joke.ui.fragment.BaseJokeFragment;
 
-public class JokeFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
+public class HomeJokePagerAdapter extends FragmentStatePagerAdapter {
 
     // TODO : change size to be dynamic
     private static final int JOKES_SIZE = 30;
 
-    public JokeFragmentStatePagerAdapter(@NonNull FragmentManager fm) {
+    public HomeJokePagerAdapter(@NonNull FragmentManager fm) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        return JokeFragment.getInstance(position);
+        return BaseJokeFragment.getInstance(R.string.app_fragment_home_joke, position, null);
     }
 
     @Override

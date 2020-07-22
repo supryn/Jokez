@@ -6,7 +6,7 @@ import com.supryn.android.joke.data.AppExecutors;
 import com.supryn.android.joke.data.JokeRepository;
 import com.supryn.android.joke.data.database.JokeDatabase;
 import com.supryn.android.joke.data.network.JokesDataSource;
-import com.supryn.android.joke.ui.JokeViewModelFactory;
+import com.supryn.android.joke.ui.main.JokeViewModelFactory;
 
 /**
  * Utility class providing ViewModel object(s).
