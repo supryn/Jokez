@@ -38,6 +38,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
 }
 
 dependencies {
@@ -75,6 +79,12 @@ dependencies {
     // Dynamic Feature Module Support
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    // Google Services APIs
+    implementation 'com.google.android.gms:play-services-ads:19.3.0'
+    implementation 'com.google.api-client:google-api-client:1.30.9'
+    implementation 'com.google.http-client:google-http-client-android:1.35.0'
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
+
 
     // Annotation processors
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"

@@ -1,5 +1,7 @@
 package com.supryn.android.joke.ui.fragment;
 
+import com.supryn.android.joke.ui.JokeClickListener;
+
 import java.util.List;
 
 /**
@@ -7,6 +9,10 @@ import java.util.List;
  *
  */
 public class FavoriteJokeFragment extends BaseJokeFragment {
+
+    public FavoriteJokeFragment(JokeClickListener clickListener) {
+        super(clickListener);
+    }
 
     private static final String JOKE_IDS = "jokeIds";
 
