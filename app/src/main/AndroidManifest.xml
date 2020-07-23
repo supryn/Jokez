@@ -13,18 +13,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <meta-data
             tools:ignore="GoogleAppIndexingWarning"
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/manifest_banner_ad_unit_id" />
+
         <activity android:name=".ui.main.MainActivity"
-                  android:launchMode="singleTop">
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".ui.JokeWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/joke_widget" />
+        </receiver>
+
     </application>
 
 </manifest>

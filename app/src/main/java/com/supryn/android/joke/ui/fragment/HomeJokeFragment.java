@@ -1,10 +1,10 @@
 package com.supryn.android.joke.ui.fragment;
 
-import com.supryn.android.joke.ui.JokeClickListener;
+import com.supryn.android.joke.ui.JokeSwipeListener;
 
 public class HomeJokeFragment extends BaseJokeFragment {
 
-    public HomeJokeFragment(JokeClickListener clickListener) {
+    public HomeJokeFragment(JokeSwipeListener clickListener) {
         super(clickListener);
     }
 

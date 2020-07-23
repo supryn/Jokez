@@ -1,6 +1,6 @@
 package com.supryn.android.joke.ui.fragment;
 
-import com.supryn.android.joke.ui.JokeClickListener;
+import com.supryn.android.joke.ui.JokeSwipeListener;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class FavoriteJokeFragment extends BaseJokeFragment {
 
-    public FavoriteJokeFragment(JokeClickListener clickListener) {
+    public FavoriteJokeFragment(JokeSwipeListener clickListener) {
         super(clickListener);
     }
 

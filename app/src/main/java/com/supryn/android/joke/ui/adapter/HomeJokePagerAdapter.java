@@ -6,16 +6,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.supryn.android.joke.R;
-import com.supryn.android.joke.ui.JokeClickListener;
+import com.supryn.android.joke.ui.JokeSwipeListener;
 import com.supryn.android.joke.ui.fragment.BaseJokeFragment;
 
 public class HomeJokePagerAdapter extends FragmentStatePagerAdapter {
 
     // TODO : change size to be dynamic
     private static final int JOKES_SIZE = 30;
-    private JokeClickListener mClickListener;
+    private JokeSwipeListener mClickListener;
 
-    public HomeJokePagerAdapter(@NonNull FragmentManager fm, JokeClickListener clickListener) {
+    public HomeJokePagerAdapter(@NonNull FragmentManager fm, JokeSwipeListener clickListener) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mClickListener = clickListener;
     }

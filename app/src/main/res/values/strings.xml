@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Jokester</string>
+    <string name="app_name">Joke Boat</string>
 
     <string name="app_fragment_home_joke">app_fragment_home_joke</string>
     <string name="app_fragment_favorite_joke">app_fragment_favorite_joke</string>

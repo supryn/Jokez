@@ -12,14 +12,14 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.supryn.android.joke.R;
-import com.supryn.android.joke.ui.JokeClickListener;
+import com.supryn.android.joke.ui.JokeSwipeListener;
 import com.supryn.android.joke.ui.adapter.HomeJokePagerAdapter;
 
 /**
  * Fragment displaying a Joke on the Home screen.
  *
  */
-public class HomeFragment extends Fragment implements JokeClickListener {
+public class HomeFragment extends Fragment implements JokeSwipeListener {
 
     private InterstitialAd mInterstitialAd;
 
@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment implements JokeClickListener {
     }
 
     @Override
-    public void onClick() {
+    public void onSwipe() {
         if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
         }

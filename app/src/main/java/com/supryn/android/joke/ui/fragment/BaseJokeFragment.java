@@ -16,7 +16,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.supryn.android.joke.R;
 import com.supryn.android.joke.databinding.FragmentJokeBinding;
 import com.supryn.android.joke.model.Joke;
-import com.supryn.android.joke.ui.JokeClickListener;
+import com.supryn.android.joke.ui.JokeSwipeListener;
+import com.supryn.android.joke.ui.JokeWidgetProvider;
 import com.supryn.android.joke.ui.main.JokeViewModel;
 import com.supryn.android.joke.ui.main.JokeViewModelFactory;
 import com.supryn.android.joke.utility.ObjectProviderUtil;
@@ -36,7 +37,7 @@ public abstract class BaseJokeFragment extends Fragment {
     private static final String PREF_FAVORITE_KEY = "key_favorite";
     private static final String JOKE_IDS = "jokeIds";
 
-    private JokeClickListener mClickListener;
+    private JokeSwipeListener mClickListener;
     private JokeViewModel mViewModel;
     private AnimatedVectorDrawable mEmptyHeart;
     private AnimatedVectorDrawable mFillHeart;
@@ -46,12 +47,12 @@ public abstract class BaseJokeFragment extends Fragment {
     private boolean mIsFavorite;
 
 
-    BaseJokeFragment(JokeClickListener clickListener) {
+    BaseJokeFragment(JokeSwipeListener clickListener) {
         super();
         mClickListener = clickListener;
     }
 
-    public static BaseJokeFragment getInstance(int fragmentResId, JokeClickListener clickListener, int position, List<Integer> favoriteJokeIds) {
+    public static BaseJokeFragment getInstance(int fragmentResId, JokeSwipeListener clickListener, int position, List<Integer> favoriteJokeIds) {
         BaseJokeFragment fragment;
         Bundle bundle = new Bundle();
         bundle.putInt(PAGE_POSITION, position);
@@ -96,6 +97,9 @@ public abstract class BaseJokeFragment extends Fragment {
             if (joke != null) {
                 binding.setJoke(joke);
                 setupShareButtonClickListener(joke);
+                JokeWidgetProvider.sendRefreshBroadcast(
+                        getActivity().getApplicationContext(),
+                        joke);
             }
         });
 
@@ -141,7 +145,7 @@ public abstract class BaseJokeFragment extends Fragment {
     private void invokeInterstitialAd() {
         // launch an interstitial ad every 5th joke
         if (mPageNumber != 0 && mPageNumber % 5 == 0) {
-            mClickListener.onClick();
+            mClickListener.onSwipe();
         }
     }
 }
