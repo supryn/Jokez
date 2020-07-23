@@ -16,7 +16,7 @@
         <meta-data
             tools:ignore="GoogleAppIndexingWarning"
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/banner_ad_unit_id" />
+            android:value="@string/manifest_banner_ad_unit_id" />
         <activity android:name=".ui.main.MainActivity"
                   android:launchMode="singleTop">
             <intent-filter>

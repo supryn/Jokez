@@ -1,7 +1,5 @@
 package com.supryn.android.joke.ui.adapter;
 
-import android.app.Activity;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

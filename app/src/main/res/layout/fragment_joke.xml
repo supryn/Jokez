@@ -21,18 +21,6 @@
         android:layout_marginLeft="@dimen/activity_main_horizontal_margin"
         android:layout_marginRight="@dimen/activity_main_horizontal_margin">
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_ad_unit_id"
-            ads:layout_constraintTop_toTopOf="parent"
-            ads:layout_constraintLeft_toLeftOf="parent"
-            ads:layout_constraintRight_toRightOf="parent"
-            />
-
-
         <TextView
             android:id="@+id/joke"
             android:layout_width="match_parent"

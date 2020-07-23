@@ -126,7 +126,6 @@ public abstract class BaseJokeFragment extends Fragment {
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, parseJokeText(joke));
                 sendIntent.setType(getString(R.string.app_share_mime_type));
-
                 Intent shareIntent = Intent.createChooser(sendIntent, getString(R.string.app_share_via_text));
                 startActivity(shareIntent);
             }

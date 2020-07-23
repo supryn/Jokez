@@ -31,8 +31,8 @@ public class HomeFragment extends Fragment implements JokeClickListener {
         ViewPager viewPager = view.findViewById(R.id.tab_viewpager);
         viewPager.setAdapter(mPagerAdapter);
 
-        mInterstitialAd = new InterstitialAd(getActivity().getApplicationContext());
-        mInterstitialAd.setAdUnitId(getString(R.string.banner_ad_unit_id));
+        mInterstitialAd = new InterstitialAd(getContext());
+        mInterstitialAd.setAdUnitId(getString(R.string.fragment_banner_ad_unit_id));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         mInterstitialAd.setAdListener(new InterstitialAddListener(mInterstitialAd));
 
@@ -45,18 +45,18 @@ public class HomeFragment extends Fragment implements JokeClickListener {
             mInterstitialAd.show();
         }
     }
-}
 
-class InterstitialAddListener extends AdListener {
+    static class InterstitialAddListener extends AdListener {
 
-    private InterstitialAd mInterstitialAd;
+        private InterstitialAd mInterstitialAd;
 
-    InterstitialAddListener(InterstitialAd interstitialAd) {
-        mInterstitialAd = interstitialAd;
-    }
+        InterstitialAddListener(InterstitialAd interstitialAd) {
+            mInterstitialAd = interstitialAd;
+        }
 
-    @Override
-    public void onAdClosed() {
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        @Override
+        public void onAdClosed() {
+            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        }
     }
 }
