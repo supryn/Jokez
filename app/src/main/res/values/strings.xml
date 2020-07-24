@@ -28,6 +28,12 @@
     <string name="app_share_mime_type">text/plain</string>
     <string name="app_share_via_text">Share with:</string>
 
+
+    <!-- Widget layout definitions -->
+    <string name="widget_test_joke_main">This is the setup portion of the joke</string>
+    <string name="widget_test_joke_delivery">Delivery portion of the joke</string>
+    <string name="widget_no_data_available">No widget data available.</string>
+
     <!-- Google Services Banner ID -->
     <string name="manifest_banner_ad_unit_id">ca-app-pub-3940256099942544~1033173712</string>
     <string name="fragment_banner_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>

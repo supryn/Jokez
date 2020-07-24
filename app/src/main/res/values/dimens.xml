@@ -4,6 +4,10 @@
     <dimen name="activity_main_vertical_margin">8dp</dimen>
     <dimen name="activity_main_horizontal_margin">8dp</dimen>
 
+    <dimen name="widget_vertical_margin">8dp</dimen>
+    <dimen name="widget_horizontal_margin">8dp</dimen>
+    <dimen name="joke_widget_vertical_text_margin">40dp</dimen>
+
     <dimen name="text_size_large">32sp</dimen>
 
 </resources>

@@ -2,9 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="@dimen/widget_vertical_margin"
+    android:layout_marginBottom="@dimen/widget_vertical_margin"
+    android:layout_marginLeft="@dimen/widget_horizontal_margin"
+    android:layout_marginRight="@dimen/widget_horizontal_margin"
+    android:background="@color/widget_background"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools">
 
 
+    <TextView
+        android:id="@+id/widget_joke_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:fontFamily="@font/tello_stick"
+        tools:text="@string/widget_test_joke_main" />
+
+    <TextView
+        android:id="@+id/widget_joke_delivery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/joke_widget_vertical_text_margin"
+        android:fontFamily="@font/tello_stick"
+        tools:text="@string/widget_test_joke_delivery" />
+
+    <!--<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@drawable/widget_item_background"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:text="@string/widget_no_data_available"
+        android:style="Base.TextAppearance.AppCompat.Subhead" />-->
 </LinearLayout>

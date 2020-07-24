@@ -2,7 +2,7 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:initialKeyguardLayout="@layout/joke_widget"
     android:initialLayout="@layout/joke_widget"
-    android:minWidth="120dp"
+    android:minWidth="160dp"
     android:minHeight="120dp"
     android:previewImage="@drawable/joke_boat"
     android:resizeMode="vertical"

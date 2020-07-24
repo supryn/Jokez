@@ -29,7 +29,6 @@ public class JokeWidgetProvider extends AppWidgetProvider {
 
     @SuppressLint("ApplySharedPref")
     public static void sendRefreshBroadcast(Context context, Joke joke) {
-        getPreferenceEditor(context).putInt(KEY_JOKE_ID, joke.jokeId).commit();
         getPreferenceEditor(context).putString(KEY_JOKE_MAIN, joke.joke).commit();
         getPreferenceEditor(context).putString(KEY_JOKE_DELIVERY, joke.delivery).commit();
         Intent intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
@@ -37,16 +36,6 @@ public class JokeWidgetProvider extends AppWidgetProvider {
         context.sendBroadcast(intent);
     }
 
-//    @Override
-//    public void onReceive(final Context context, Intent intent) {
-//        if (intent.getAction().equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
-//            AppWidgetManager mgr = AppWidgetManager.getInstance(context);
-//            RemoteViews remoteViews = buildWidget(context);
-//            mgr.updateAppWidget(getWidgetProvider(context), remoteViews);
-//
-//        }
-//        super.onReceive(context, intent);
-//    }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -65,9 +54,13 @@ public class JokeWidgetProvider extends AppWidgetProvider {
 
     private static RemoteViews buildWidget(Context context) {
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.joke_widget);
-//        String recipeName = PreferenceManager.getDefaultSharedPreferences(context).getString(RECIPE_NAME_KEY, null);
+        String jokeMain = PreferenceManager.getDefaultSharedPreferences(context).getString(KEY_JOKE_MAIN, null);
+        String jokeDelivery = PreferenceManager.getDefaultSharedPreferences(context).getString(KEY_JOKE_DELIVERY, null);
+        remoteViews.setTextViewText(R.id.widget_joke_main, jokeMain);
+        remoteViews.setTextViewText(R.id.widget_joke_delivery, jokeDelivery);
 
 
+//        remoteViews.setEmptyView();
 
         return remoteViews;
     }

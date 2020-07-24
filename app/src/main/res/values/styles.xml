@@ -10,4 +10,14 @@
         <item name="android:actionMenuTextColor">@android:color/white</item>
     </style>
 
+
+    <style name="App_JokeTextStyle" parent="Base.TextAppearance.AppCompat.Display1">
+        <item name="fontFamily">@font/tello_stick</item>
+    </style>
+
+    <style name="Widget_JokeTextStyle" parent="Base.TextAppearance.AppCompat.Body1">
+        <item name="fontFamily">@font/tello_stick</item>
+    </style>
+
+
 </resources>
