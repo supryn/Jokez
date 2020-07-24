@@ -96,6 +96,9 @@ public abstract class BaseJokeFragment extends Fragment {
         mViewModel.getJoke(getJokeId(mPageNumber)).observe(getViewLifecycleOwner(), joke -> {
             if (joke != null) {
                 binding.setJoke(joke);
+                hideView(binding.getRoot().findViewById(R.id.progress_bar));
+                showView(binding.getRoot().findViewById(R.id.button_share_joke));
+                showView(binding.getRoot().findViewById(R.id.button_favorite_joke));
                 setupShareButtonClickListener(joke);
                 JokeWidgetProvider.sendRefreshBroadcast(
                         getActivity().getApplicationContext(),
@@ -147,5 +150,13 @@ public abstract class BaseJokeFragment extends Fragment {
         if (mPageNumber != 0 && mPageNumber % 5 == 0) {
             mClickListener.onSwipe();
         }
+    }
+
+    private void showView(View view) {
+        view.setVisibility(View.VISIBLE);
+    }
+
+    private void hideView(View view) {
+        view.setVisibility(View.INVISIBLE);
     }
 }
