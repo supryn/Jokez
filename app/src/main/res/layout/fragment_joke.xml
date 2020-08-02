@@ -12,7 +12,6 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.fragment.HomeJokeFragment"
@@ -20,7 +19,6 @@
         android:layout_marginBottom="@dimen/activity_main_vertical_margin"
         android:layout_marginLeft="@dimen/activity_main_horizontal_margin"
         android:layout_marginRight="@dimen/activity_main_horizontal_margin">
-
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
@@ -59,8 +57,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/joke"
             tools:text="@string/sample_joke_text" />
-
-
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
@@ -69,31 +65,26 @@
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
-
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/joke_twopart_delivery">
             <ImageButton
                 android:id="@+id/button_share_joke"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/fragment_joke_favorite_share_center_distance_margin"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/content_description_share"
-                android:visibility="invisible"
-                android:src="@drawable/share" />
-
+                android:src="@drawable/share"
+                android:visibility="invisible" />
             <ImageView
                 android:id="@+id/button_favorite_joke"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:visibility="invisible"
+                android:layout_width="@dimen/fragment_joke_favorite_button_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/fragment_joke_favorite_share_center_distance_margin"
                 android:contentDescription="@string/content_description_favorite"
-                android:src="@drawable/ic_heart" />
-
-
+                android:src="@drawable/ic_heart"
+                android:visibility="invisible" />
         </LinearLayout>
-
-
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

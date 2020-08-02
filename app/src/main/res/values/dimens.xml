@@ -10,4 +10,7 @@
 
     <dimen name="text_size_large">32sp</dimen>
 
+    <dimen name="fragment_joke_favorite_button_width">64dp</dimen>
+    <dimen name="fragment_joke_favorite_share_center_distance_margin">40dp</dimen>
+
 </resources>
